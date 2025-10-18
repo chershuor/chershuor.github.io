@@ -1,11 +1,13 @@
 html {
   font-size: 10vw;
+  height: 100%;
+  
 }
 h1 {
   margin: 0;
   padding: 0 0 1vw 0;
   text-decoration: none;
-  background: linear-gradient(135deg, #00ffd8, #00d8ff);
+  background: linear-gradient(135deg, #00e0a0, #00a0e0);
   -webkit-background-clip: text;
   color: transparent;
   float:left;
@@ -19,11 +21,12 @@ h1 {
 }
 
 h2 {
-  margin: 0;
+  margin: 0 0 0 0;
   padding: 0 0;
   font-size: 4vw;
   text-align: center;
-  color: rgb(192, 255, 255);
+  color: #00c0c0;
+  
 }
 
 h3 {
@@ -34,10 +37,10 @@ h3 {
 }
 
 p {
-  font-size: 24px;
+  font-size: 2.5vw;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
-  color:azure;
+  color:#00c0c0;
 }
 
 h4 {
@@ -55,7 +58,8 @@ video {
 body {
   /*width: 75%;
   margin: 2vw auto;*/
-  background: linear-gradient(-45deg, #00e0b0, #00a0f0);
+  background: linear-gradient(45deg, #ffffe0, #c0ffff);
   padding: 2vw 2vw 2vw 2vw;
+  background-attachment: fixed;
   /*border: 0.5vw solid #006060;*/
 }
