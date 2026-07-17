@@ -1,43 +1,464 @@
 <!DOCTYPE html>
-<html lang="zh">
-
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <title>撤硕.com</title>
-  <link href="style.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>龙湾中央商务区初级中学</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, -apple-system,"微软雅黑"}
+body{
+    background:
+        radial-gradient(circle at 12% 12%, rgba(255,255,255,0.95), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(190,226,255,0.9), transparent 32%),
+        linear-gradient(135deg, #f7f9fc 0%, #eaf4ff 45%, #f0f8ff 100%);
+    background-attachment: fixed;
+    padding-bottom: 40px;
+}
+
+:root{
+    --main-blue:#0d3d80;
+    --accent-blue:#1250a8;
+    --glass-bg:rgba(255,255,255,0.58);
+    --glass-border:rgba(255,255,255,0.72);
+    --card-shadow:
+        0 18px 45px rgba(10, 40, 90, 0.12),
+        0 8px 18px rgba(10, 40, 90, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.86);
+    --card-shadow-soft:
+        0 10px 24px rgba(10, 40, 90, 0.08),
+        0 4px 12px rgba(10, 40, 90, 0.06),
+        inset 0 1px 0 rgba(255,255,255,0.86);
+}
+
+/* 全屏Banner */
+.banner{
+    position:relative;
+    width:100%;
+    height:65vh;
+    min-height:360px;
+    max-height:720px;
+    overflow:hidden;
+}
+.banner-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.85;
+}
+.banner-icon{
+    position:absolute;
+    top:24px;left:24px;
+    width:68px;height:68px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.18),
+        inset 0 1px 1px rgba(255,255,255,0.9);
+    padding:0;
+    overflow:hidden;
+    z-index:10;
+}
+.banner-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    border-radius:0;
+}
+.banner-text{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.4);
+    width:90%;
+}
+.banner-top-small{
+    font-size:clamp(16px,2.2vw,22px);
+    opacity:0.95;
+    margin-bottom:10px;
+}
+.banner-main{
+    font-size:clamp(32px,7vw,64px);
+    font-weight:bold;margin-bottom:14px
+}
+.banner-sub{
+    font-size:clamp(18px,2.6vw,28px);
+    opacity:0.98;margin-bottom:10px;
+}
+.banner-bottom-small{
+    font-size:clamp(16px,2.2vw,22px);
+    opacity:0.9;
+}
+
+.container{
+    max-width:1400px;
+    margin:0 auto;
+    padding:0 20px;
+}
+
+.card-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin:24px 0;
+}
+@media(max-width:1100px){
+    .card-row{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+    .card-row{grid-template-columns:1fr;}
+}
+.text-card{
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--glass-border);
+    border-radius:18px;
+    padding:18px;
+    box-shadow:var(--card-shadow);
+    height:100%;
+    transition:0.22s ease;
+}
+.text-card:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 22px 52px rgba(10, 40, 90, 0.16),
+        0 10px 22px rgba(10, 40, 90, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.card-tit{
+    font-size:17px;color:var(--main-blue);margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.75);
+    font-weight:600;
+}
+.card-txt{
+    color:#475569;line-height:1.65;font-size:14px;
+}
+.card-txt a{
+    color:var(--accent-blue);word-break:break-all;
+}
+
+.form-wrap{
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--glass-border);
+    border-radius:18px;
+    padding:24px;
+    box-shadow:var(--card-shadow-soft);
+    margin-bottom:28px;
+}
+.form-tit{
+    font-size:24px;color:var(--main-blue);margin-bottom:20px;padding-bottom:8px;
+    border-bottom:2px solid rgba(13, 61, 128, 0.18);
+    font-weight:700;
+}
+.item{margin-bottom:14px}
+input,textarea{
+    width:100%;padding:14px 16px;border:1px solid rgba(255,255,255,0.85);
+    background:rgba(255,255,255,0.72);
+    border-radius:12px;font-size:16px;
+    outline:none;transition:0.22s ease;
+    color:#1e293b;
+}
+input:focus,textarea:focus{
+    border-color:var(--accent-blue);
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(18, 80, 168, 0.08);
+}
+.btn{
+    width:100%;padding:15px;background:
+        linear-gradient(135deg, #0d3d80 0%, #1250a8 100%);
+    color:#fff;border:none;border-radius:12px;
+    font-size:18px;font-weight:bold;cursor:pointer;transition:0.22s ease;
+    box-shadow:
+        0 8px 18px rgba(13, 61, 128, 0.22),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.btn:hover{
+    transform:translateY(-2px);
+    background:
+        linear-gradient(135deg, #0b3068 0%, #0d3d80 100%);
+    box-shadow:
+        0 12px 24px rgba(13, 61, 128, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.45);
+}
+
+.msg-tit{
+    font-size:24px;margin:30px 0 16px;color:var(--main-blue);
+    font-weight:700;
+}
+
+.msg-item{
+    margin-bottom:12px;
+}
+.msg-bubble-wrap{
+    display:flex;
+}
+.msg-left{
+    max-width:92%;
+}
+.msg-head{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:4px;
+    padding:0;
+    flex-wrap:nowrap;
+}
+.msg-name{
+    font-weight:700;font-size:15px;
+    white-space:nowrap;
+}
+.msg-time{
+    font-size:12px;color:#94a3b8;
+    white-space:nowrap;
+}
+.msg-mail{
+    font-size:11px;color:#64748b;
+    white-space:nowrap;
+}
+.msg-bubble{
+    border-radius:16px 16px 16px 6px;
+    padding:8px 16px;
+    line-height:1.6;
+    font-size:15px;
+    transition:0.22s ease;
+    word-break:break-word;
+    width: fit-content;
+    max-width: 100%;
+}
+.msg-bubble a{
+    word-break:break-all;
+    text-decoration:underline;
+    color:#ffffff !important;
+}
+.tip{color:#09a357;text-align:center;margin:10px;font-weight:500;font-size:17px}
+
+@media(max-width:640px){
+    .banner-icon{
+        width:56px;height:56px;
+        top:18px;left:18px;
+    }
+    .container{
+        padding:0 16px;
+    }
+    .card-row{
+        gap:14px;
+    }
+    .text-card{
+        padding:16px;
+    }
+    .msg-left{
+        max-width:96%;
+    }
+}
+</style>
 </head>
-
 <body>
-  <div class="container" style="display: flex;">
-  <h1>撤硕.com<br><span style="text-align: center;font-size: 3vw;">我家住在葫芦岛</span></h1>
-  <div style="flex: 1;"><h2 style="line-height: 0.4;">民以食为天，食以㞎为先</h2><h2 style="line-height: 1.6;">用餐愉快，请勿暴饮暴食</span></h2>
-    <h2 style="line-height:0.6;font-size: 2vw;">老八一战、二战、三战</h2></div>
-  </div>
-  <div style="display: flex;justify-content: center;">
-  <div style="width:30vw;height: 40vw;float:left;margin:0 1vw 0 0;">
-  <video controls>
-    <source src="1.mp4" type="video/mp4">
-  </video>
-  </div>
-  <div style="width:30vw;height: 40vw;float:left;margin:0 1vw 0 0;">
-  <video controls>
-    <source src="2.mp4" type="video/mp4">
-  </video>
-  </div>
-  <div style="width:22.5vw;height: 40vw;float:left;margin:0;">
-  <video controls>
-    <source src="3.mp4" type="video/mp4">
-  </video>
-  </div>
-  </div>
-  <p>千万不要举报这个珍贵的域名，谢谢！撤硕.com若不幸被封是网络的一大憾事！<br>
-  联系：<br>📧c@ɕ.cc<br>📞13130973177/17624296293<br><b><a href="http://ɕ.cc/">我</a>家住在葫芦岛</b>（真的），岛市的美食网当然要岛市人建。<br>
-  如果您喜欢本网站，可以<a href="1.html">点此赞助</a>，谢谢。<br>
-  广告：<a href="https://cbdjm.xyz/">葫芦岛龙湾中央商务区初级中学</a></p>
+<div class="banner">
+    <img class="banner-img" src="banner.jpg" alt="首页背景图">
+    <div class="banner-icon">
+        <img src="logo.jpg" alt="校徽图标">
+    </div>
+    <div class="banner-text">
+        <div class="banner-top-small">龙湾中央商务区初级中学网站&留言板</div>
+        <div class="banner-main">I♥CBD Junior Middle School</div>
+        <div class="banner-sub">葫芦岛市最美好的初中</div>
+        <div class="banner-bottom-small">cbdjm.xyz</div>
+    </div>
+</div>
 
+<div class="container">
+    <div class="card-row">
+        <div class="text-card">
+            <div class="card-tit">全市最优秀的初中</div>
+            <div class="card-txt">“知识改变命运，奋斗成就未来”
+地址：海宁路9号
+我校中考成绩是全市最好的，统招人数、一高中升学人数不是最高是因为体量不大，小而精。
+2024年统招7人，2025年统招11人；
+2024年实验二小毕业生全面升入CBD中学，最优质的学苗便全部集中于我校，2027年中考我校必将也在体量上全面领先。
+（有关数据待补充）</div>
+        </div>
+        <div class="text-card">
+            <div class="card-tit">校园照片与视频</div>
+            <div class="card-txt">400多张照片，包括校园风景、运动会和毕业典礼：<a href="https://www.123912.com/s/MAi7Vv-IFIVH/" target="_blank">https://www.123912.com/s/MAi7Vv-IFIVH/</a>
+学校2021年的简介：<a href="https://www.bilibili.com/video/BV1qnV3z1Emd/" target="_blank">https://www.bilibili.com/video/BV1qnV3z1Emd/</a>
+毕业典礼时随手拍的，B站上的几条视频：<a href="https://www.bilibili.com/video/BV1i42VYRE4g/" target="_blank">https://www.bilibili.com/video/BV1i42VYRE4g/</a></div>
+        </div>
+        <div class="text-card">
+            <div class="card-tit">校园资讯专栏</div>
+            <div class="card-txt">此处可填写校园最新通知、招生政策、师资介绍等内容</div>
+        </div>
+    </div>
 
+    <div class="tip" id="submitTip"></div>
+
+    <div class="form-wrap">
+        <h3 class="form-tit">写下留言</h3>
+        <form id="msgForm">
+            <div class="item">
+                <input name="name" placeholder="昵称（必填）" required>
+            </div>
+            <div class="item">
+                <input name="email" placeholder="邮箱（选填）">
+            </div>
+            <div class="item">
+                <textarea name="content" placeholder="请输入留言内容" required></textarea>
+            </div>
+            <button class="btn" type="submit">提交留言</button>
+        </form>
+    </div>
+
+    <h3 class="msg-tit">全部留言</h3>
+    <div id="msgListBox"></div>
+</div>
+
+<script>
+// ==================== 配置：替换为你的老薛主机接口地址 ====================
+const API_HOST = "https://www.cbdjm.xyz/api.php";
+
+// 10组青→蓝→紫配色（完全和之前PHP一致）
+const colorSet = {
+    bg: [
+        'rgba(26, 188, 156, 0.85)',
+        'rgba(41, 198, 211, 0.85)',
+        'rgba(54, 162, 235, 0.85)',
+        'rgba(30, 136, 229, 0.85)',
+        'rgba(37, 99, 235, 0.85)',
+        'rgba(67, 97, 238, 0.85)',
+        'rgba(99, 102, 241, 0.85)',
+        'rgba(129, 140, 248, 0.85)',
+        'rgba(139, 92, 246, 0.85)',
+        'rgba(168, 85, 247, 0.85)',
+    ],
+    border: [
+        'rgba(26, 188, 156, 0.95)',
+        'rgba(41, 198, 211, 0.95)',
+        'rgba(54, 162, 235, 0.95)',
+        'rgba(30, 136, 229, 0.95)',
+        'rgba(37, 99, 235, 0.95)',
+        'rgba(67, 97, 238, 0.95)',
+        'rgba(99, 102, 241, 0.95)',
+        'rgba(129, 140, 248, 0.95)',
+        'rgba(139, 92, 246, 0.95)',
+        'rgba(168, 85, 247, 0.95)',
+    ],
+    nameColor: [
+        '#0e7864','#0e7986','#19548c','#0f4782','#183899',
+        '#2c3bb8','#474ab9','#5c64c0','#6b3cb3','#8440bb'
+    ]
+};
+// JS实现原crc32哈希，同昵称固定同颜色
+function crc32(str) {
+    let crc = 0xFFFFFFFF;
+    for (let i = 0; i < str.length; i++) {
+        let byte = str.charCodeAt(i);
+        crc ^= byte;
+        for (let j = 0; j < 8; j++) {
+            crc = (crc & 1) ? (crc >>> 1) ^ 0xEDB88320 : crc >>> 1;
+        }
+    }
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+}
+function getColor(name){
+    const idx = crc32(name) % colorSet.bg.length;
+    return {
+        bg: colorSet.bg[idx],
+        border: colorSet.border[idx],
+        nameColor: colorSet.nameColor[idx],
+        text: "#ffffff"
+    }
+}
+
+// 渲染留言列表
+function renderMsg(list){
+    const box = document.getElementById("msgListBox");
+    if(list.length === 0){
+        box.innerHTML = `
+        <div class="msg-item">
+            <div class="msg-bubble-wrap">
+                <div class="msg-left">
+                    <div class="msg-bubble" style="background:${colorSet.bg[0]};border:1px solid ${colorSet.border[0]};color:#fff;">
+                        暂无留言，期待第一条留言～
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        return;
+    }
+    let html = "";
+    list.forEach(item=>{
+        const c = getColor(item.name);
+        let mailHtml = item.email ? `<span class="msg-mail">${item.email}</span>` : "";
+        // 链接自动加target
+        let contentHtml = item.content.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1" target="_blank">$1</a>`);
+        html += `
+        <div class="msg-item">
+            <div class="msg-bubble-wrap">
+                <div class="msg-left">
+                    <div class="msg-head">
+                        <span class="msg-name" style="color:${c.nameColor};">${item.name}</span>
+                        <span class="msg-time">${item.time}</span>
+                        ${mailHtml}
+                    </div>
+                    <div class="msg-bubble" style="background:${c.bg};border:1px solid ${c.border};color:${c.text};">
+                        ${contentHtml}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    })
+    box.innerHTML = html;
+}
+
+// 拉取留言数据
+async function loadMsg(){
+    try{
+        const res = await fetch(API_HOST);
+        const json = await res.json();
+        if(json.code === 1) renderMsg(json.data);
+    }catch(err){
+        document.getElementById("msgListBox").innerHTML = "<p>留言加载失败，请稍后刷新</p>";
+        console.error(err);
+    }
+}
+
+// 表单提交
+document.getElementById("msgForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    const tipDom = document.getElementById("submitTip");
+    const fd = new FormData(this);
+    const data = {
+        name: fd.get("name").trim(),
+        email: fd.get("email").trim(),
+        content: fd.get("content").trim()
+    };
+    try{
+        const res = await fetch(API_HOST,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(data)
+        });
+        const json = await res.json();
+        if(json.code === 1){
+            tipDom.innerText = "留言提交成功！";
+            this.reset();
+            loadMsg(); // 刷新留言
+        }else{
+            tipDom.innerText = json.msg;
+        }
+    }catch(err){
+        tipDom.innerText = "提交失败，网络或接口异常";
+        console.error(err);
+    }
+    setTimeout(()=>tipDom.innerText="",3000);
+})
+
+// 页面载入自动加载留言
+window.onload = loadMsg;
+</script>
+</body>
 </html>
-
-
-
-
